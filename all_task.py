@@ -32,7 +32,7 @@ class Student(Comparisons_eq_lt):
     def add_finished_courses(self, item):
         self.finished_courses.append(item)
 
-    def rate_hw(self, lecturer, course, grade):
+    def rate_hw(self, lecturer, course, grade):  # Для оценки лекций
         self.check_grades_courses(lecturer, course, grade)
         self.grades_courses_lecturer.append(course)
 
@@ -44,7 +44,7 @@ class Student(Comparisons_eq_lt):
         if course not in self.courses_in_progress:  # Студент должны быть на этом курсе
             raise AttributeError(f'Студент {self.name} {self.surname} не за креплен на курсе {course}')
 
-        if course not in lecturer.courses_attached:  # Ментор должны быть на этом курсе
+        if course not in lecturer.courses_attached:  # Ментор должен быть на этом курсе
             raise AttributeError(f'Ментор {lecturer.name} {lecturer.surname} не за креплен на курсе {course}')
 
         if grade not in range(11):  # Оценка в диапазоне [0:10]
@@ -162,7 +162,6 @@ print(f"{student1}\n{'-'*20}\n"
       f"Средняя за все курсы оценка студента {student3.name} {student3.surname}: {y2}\n"
       f"Истинность равенства данных оценок: {y1} = {y2} --> {student2 == student3}\n"
       f"Истинность оператора сравнения данных оценок: {y1} ≥ {y2} --> {student2 >= student3}\n{'-'*20}")
-
 
 # Задание 4 (сказано добавить функции, а не методы, поэтому пишу тут):
 def avegare_grade_course_student(courses, *student):
