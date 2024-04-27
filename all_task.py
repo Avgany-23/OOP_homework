@@ -1,18 +1,18 @@
 from abc import abstractmethod
 from random import randint
 
-class Comparisons_eq_lt:  # Класс для операторов наследования (дочерний класс Student and Lecturer)
+
+class Comparisons_eq_lt:  # Класс для наследования операторов сравнения (наследует класс Student and Lecturer)
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
         self.grades = {}
 
-
     def __eq__(self, other):  # Для равенства и неравенства
         a1, a2 = self.average_r(self.grades), self.average_r(other.grades)
         return a1 == a2
 
-    def __le__(self, other):
+    def __le__(self, other):  # Для нестрогих операторов сравнения
         a1, a2 = self.average_r(self.grades), self.average_r(other.grades)
         return a2 >= a1
 
@@ -67,7 +67,7 @@ class Mentor:
         self.name, self.surname = name, surname
         self.courses_attached = []
 
-    def add_courses_attached(self, item):
+    def add_courses_attached(self, item):  # Добавление проводимых курсов
         self.courses_attached.append(item)
 
     @abstractmethod  # У лектора (класс Lecturer) не будет доступа к выставлению оценок пока не переопределён этот метод
@@ -147,7 +147,7 @@ x2 = mentor3.average_r(mentor3.grades)  # Средняя за все лекци�
 y1 = student2.average_r(student2.grades)  # Средняя за все курсы оценка студента 2
 y2 = student3.average_r(student3.grades)  # Средняя за все курсы оценка студента 3
 
-# Вывод всех условий
+# Вывод всех условий (задание 2-3)
 print(f"{student1}\n{'-'*20}\n"
       f"{student2}\n{'-'*20}\n"
       f"{student3}\n{'-'*20}\n"
@@ -164,7 +164,7 @@ print(f"{student1}\n{'-'*20}\n"
       f"Истинность оператора сравнения данных оценок: {y1} ≥ {y2} --> {student2 >= student3}\n{'-'*20}")
 
 
-# Дз 4 (сказано функция, а не метод):
+# Задание 4 (сказано добавить функции, а не методы, поэтому пишу тут):
 def avegare_grade_course_student(courses, *student):
     middle_grade_courses = 0
     middle_grade_courses += sum(map(lambda x: sum(x.grades[courses])/len(x.grades[courses]), student))
@@ -174,18 +174,15 @@ def avegare_grade_course_student(courses, *student):
 print('\n'.join(list(map(lambda x: avegare_grade_course_student(x, student1, student2, student3),
                          ('Python', 'Java', 'Django')))), '\n')
 
-
-
 '''
-Небольшой комментарий: я сделал так, что определенный курс ведет только один ментор, следовательно студент может
-выставлять только одну итоговую оценку за курс определенному ментору.
-поэтому создал функцию по средней оценке лектора за проведенные им курсы
+Небольшой комментарий: я сделал именно такую функцию, в моем коде определенный курс ведет только один ментор, 
+следовательно студент может выставлять только одну итоговую оценку за курс определенному ментору. Больше одной оценки
+программа выставить не даст. Поэтому создал функцию по средней оценке лектора за проведенные им курсы
 '''
 def avegare_grade_courses_mentor(mentor, *courses):
-
     if not all(True if course in mentor.courses_attached else False for course in courses):  # Проверка на наличие
         not_course = list(filter(lambda x: x not in mentor.courses_attached, courses))
-        return f'У {mentor.name} {mentor.surname} нет ведёт курсы {', '.join(map(str, not_course))}'
+        return f'{mentor.name} {mentor.surname} нет ведёт курс(ы) {', '.join(map(str, not_course))}'
 
     middle_grade_course = []
     for course in courses:
@@ -200,5 +197,5 @@ print(avegare_grade_courses_mentor(mentor1, 'Python', 'Java'))
 # Ментор 3 ведёт лекции только на курсе Django
 print(avegare_grade_courses_mentor(mentor3, 'Django'))
 
-# Вылезет другое сообщение, так как ментор 3 не ведёт курс Python и Java. В ошибке появятся курсы, которых нет
+# Вылезет другое сообщение, так как ментор 3 не ведёт курс Python и Java. В сообщении появятся отсутствующие
 print(avegare_grade_courses_mentor(mentor3, 'Django', 'Python', 'Java'))
