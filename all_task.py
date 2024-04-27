@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from random import randint
 
 
@@ -70,7 +69,8 @@ class Mentor:
     def add_courses_attached(self, item):  # Добавление проводимых курсов
         self.courses_attached.append(item)
 
-    @abstractmethod  # У лектора (класс Lecturer) не будет доступа к выставлению оценок пока не переопределён этот метод
+
+    # У лектора (класс Lecturer) не будет доступа к выставлению оценок пока не переопределён этот метод
     def rate_hw(self, student, course, grade):
         raise UserWarning(f'{self.__name__} запрещено выставлять оценки')
 
