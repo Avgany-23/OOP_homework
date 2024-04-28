@@ -129,7 +129,7 @@ mentor3.add_courses_attached('Django')
 grade_mentor1_Python = [i.rate_hw(mentor1, 'Python', randint(0, 10)) for i in (student1, student2, student3)]
 grade_mentor1_Java = [i.rate_hw(mentor1, 'Java', randint(0, 10)) for i in (student1, student2, student3)]
 
-# Выставление (случайных) оценок ментору 1 и ментору 3 студентами по курсу Django
+# Выставление (случайных) оценок ментору 3 студентами по курсу Django
 grade_mentor3 = [i.rate_hw(mentor3, 'Django', randint(0, 10)) for i in (student1, student2, student3)]
 
 # Добавление предметов, по которым ментор 2 (Reviewer) может ставить оценки
@@ -196,5 +196,5 @@ print(avegare_grade_courses_mentor(mentor1, 'Python', 'Java'))
 # Ментор 3 ведёт лекции только на курсе Django
 print(avegare_grade_courses_mentor(mentor3, 'Django'))
 
-# Вылезет другое сообщение, так как ментор 3 не ведёт курс Python и Java. В сообщении появятся отсутствующие
+# Вылезет другое сообщение, так как ментор 3 не ведёт курс Python и Java. В сообщении появятся отсутствующие курсы
 print(avegare_grade_courses_mentor(mentor3, 'Django', 'Python', 'Java'))
